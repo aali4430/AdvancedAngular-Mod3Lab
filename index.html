@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <style type="text/css">
+            header.app-header {background-color: #337ab7;border-color:#337ab7;color:white !important;border-radius: 0px;}
+            header a {color:white !important; line-height:50px;}
+            form {padding-top:10px;padding-bottom:10px;}
+        footer.app-footer {position:absolute; left:0px; right:0px; bottom:0px;height:40px; line-height:40px; color: #31708f;background-color: #d9edf7;border-color: #bce8f1;}
+    </style>
+</head>
+
+<body ng-app="myApp">
+<header class="container-fluid app-header">
+    <section>
+        <nav class="pull-right">
+            <a href="#signin">Sign In</a> | <a href="#signup">Sign Up</a>  
+        </nav>
+    </section>
+</header>
+    <main class="container-fluid">
+        <div ng-view></div>
+    </main>
+    <footer class="container-fluid app-footer">Tera2Tech &copy; All rights reserved</footer>
+<script>
+var app = angular.module("myApp", ["ngRoute"]);
+app.config(function($routeProvider) {
+    $routeProvider
+    .when("/signin", {
+        templateUrl: "signin.html"
+    })
+    .when("/signup", {
+        templateUrl: "signup.html"
+    })
+    .when("/", {
+        templateUrl: "home.html"
+    })
+   .otherwise({redirectTo:"/"});
+});
+</script>
+</body>
+</html>
