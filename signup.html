@@ -1,0 +1,27 @@
+            
+            <form  name="myform">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input class="form-control" required type="text" ng-model="firstname" />
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input class="form-control" required type="text" ng-model="lastname" />
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input class="form-control" required type="email" ng-model="email" />
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input class="form-control" name="password" required type="password" ng-model="password" />
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input class="form-control" name="confirmpassword" required type="password" ng-model="confirmpassword" />
+                    <span style="color:red;" data-attr-pp="{{password}}" data-attr-cp="{{confirmpassword}}" ng-show="password && confirmpassword && password!=confirmpassword" >Password and Confirm Password does not match</span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Login" ng-click="vm.login()" />
+                </div>
+            </form>
