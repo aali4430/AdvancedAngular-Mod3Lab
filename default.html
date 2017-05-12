@@ -1,0 +1,18 @@
+<form>
+    <div class="col-md-3 col-sm-6" ng-repeat="p in vm.products">
+        <div class="thumbnail text-center" ng-click="vm.LoadDetail(1)">
+            <img src="{{p.url}}" alt="Click To View Detail">
+            <h4 class="text-danger">{{p.name}}</h4>
+            <p>{{p.description}}</p>
+            <hr class="line"/>
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <button type="button" class="btn btn-link">Add to Wishlist</button>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <button class="btn btn-danger right"> Add To Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
