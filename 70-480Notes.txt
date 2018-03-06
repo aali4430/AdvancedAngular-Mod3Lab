@@ -1,0 +1,391 @@
+canvasContext.arc(x,y,radius, startangle,endAngle, counterClock)
+canvasContext.quadraticCurveTo(x1,y1,x2,y2)
+canvasContext.bezierCurveTo(x1,y1,c1,c2,x2,y2)
+canvasContext.rect(x1,y1,height,width)
+canvasContext.fillStyle=the style filling inner space.
+canvasContext.fill();
+canvasContext.strokeStyle= the style of actual lines.
+canvasContext.stroke()
+canvasContext.lineTo(x,y)
+canvasContext.moveTo(x,y)
+canvasContext.beginPath()= to start over again with a new shape.
+canvasContext.lineCap = "round";
+canvasContext.lineWidth = 10;
+canvasContext.fillRect(x1,y1,x2,y2) instead of fill calll this to fill rects.
+
+var grad=canvasContext.createLinearGradient(x1,y1,x2,y2)
+grad.addColorStop(startingPointFloat, colorString);
+
+canvasContext.createRadialGradient(x1, y1,r1,x2,y2,r2);
+
+canvasContext.createPattern(image,repitition)
+canvasContext.drawImage(image,x1,y1, width,height); 
+canvasContext.strokeText(text,x1,y1,width); write text to canvas;
+canvasContext.fillText(text,x1,y1,width); write filled text to canvas 
+----------------------SVG--------------------
+CIrcle: <circle cx="10" cy="10" r="5" fill="red">centerX,centerY,, radius
+Rectangle: <rect x="10" y="10" height="20" width="30" fill="red"
+
+polygon: <polygon points="p1(x,y) p2(x,y)... pn(x,y)"
+
+polyline:<polyline points="p1(x,y) p2(x,y)... pn(x,y)" style="stroke:orange; fill:none; stroke-width:5;" 
+
+line: <line x1="10" y1="10" x2="2" y2="20" />
+Ellipse: <ellipse cx="250" cy="150" rx="30" ry="55" fill="green"/>
+<text x="10" y="10" style="stroke:red; stroke-width:1px;">
+------------------------------
+POSITIONING: Absolute/Relative
+TRANSFORM: Make small, large, rotate etc
+    transform: rotate(90deg);//-90deg for counterclockwise.
+    transform: translate(x-axiz,y-axis)//orginal place to top/right
+    transform: skew(10deg, 10deg);
+    transform: scale(1.5); increases/decrease size
+    transform: translate(50px,0px) scale(1.5) skew(10deg, 10deg);
+--------------- Storage API -----------
+localStorage, sessionStorage
+Methods: setItem(kay,value), getItem[0],getItem(key),removeItem(key),key[0]
+Properties: localStorage.length,sessionStorage.length
+separate storage space for each domain.
+--------------- Appcache API -----------
+Two things required to work 1. menifest file. 2. Javascript API
+To use page in offine use <html menifest="webapp.appcache"
+menifest file start with CACHE MENIFEST
+menifest file has 3 sections(CACHE, NETWORK, FALLLBACK)
+#SECTION1
+CACHE
+app.js
+#SECTION2
+NETWORK
+login.html
+#SECTION3
+FALLBACK
+login.html falllback-login.html
+/resources /resource.jpg
+-------------- Geo Location API-----------
+var geoloc = window.navigator.geolocation;
+-----
+getloc.getCurrentPosition(positioncallback,[ErrorCallBacks], [position options])
+positionobtions: enableHighAccuracy:true, timeout:3000,maximumAge:8000
+positioncallback(pos)
+{
+   pos.coords.latitude;
+   pos.coords.longitude;
+}
+errorcallback(error){error.message;error.code;}
+-----------------------------
+var watcher = geoloc.watchPosition(successCallBack,errorCallback,positionOptions)
+succcessCalllback(pos){}
+errorCalllback(error){}
+geoloc..clearWatch(watcher); // To be called to stop polling for positions
+---------  Object creation + prototyping ---------
+0. var Book={};
+1. var Book=new Object() // called
+2. var Book = {id=1,auther="",publisher='',nextPage=function(){}};
+3. function Book(){this.id=1,this.auther="",this.publisher='',this.nextPage=function(){}};
+4. Book.prototype{
+id:'',auther:'',publisher:'',showNextPage:function nextPage(){}
+}
+function Book(){}; function Book(id,auther,publisher){}; // constructor for book prototype
+Book.prototype.id=1; // other way to set/add prototype properties.
+------ inheritance -----
+1. var popupBook=Object.create(Book.prototype,
+                                                   {hasVoice:{value:false},showPoup:{value:function show(){}}}
+                             );
+2. function popupBook(){Book.call(this); // call base class constructor, also add base constructor params here  }; 
+popupBook.prototype = Book.prototype; // inherit from book prototype
+popupBook.prototype.hasVoice = false;
+popupBook.prototype.showpopup=function Show(){};
+------------------- Switch -------
+switch(value){
+case 1:
+case 2:
+alert('case 1 or case 2 passed');
+break
+}
+--------- Array Declaration  ------
+var anArray = new Array();
+var anArray = new Array(5);
+var anArray = new Array('soccer', 'basketball', …, 'badminton');
+var anArray = ['soccer', 'basketball', …,'badminton'];
+-------- 2D Array -----
+var multiArray = new Array(3);
+multiArray[0] = new Array(3);
+multiArray [0][2] = '2 of zero';
+------ array object methods -------
+var array3=array1.concat(array2);
+array.indexOf('searchstring', startindex);
+array.lastIndexOf('searchstring',startindex);
+var string = array.join(',')// join all elements in a string separated with provided character;
+array.reverse();
+array.sort();
+var slicedArray = array.slice(startindex,endindex)// end index does not removed from array.
+var splicedArray = array.splice(startindex,numberOfElements,[itemsToBeReplaced]);
+array.push(newElement);
+array.pop();//last element removed
+array.unshift(newElement)=enque // insert at start;
+array.shift();=dequeue//removes from start
+----------- advanced array methods ------
+1. every: var isEvenArray = array.every(isEven,this);
+function isEven(value,index,array){
+ return value%2==0;
+}
+2. some: var isEvenArray=array.some(isEven,this);
+function isEven(value,index,array){
+return value%2==0;
+}
+3.forEach: array.forEach(checkEven);
+function checkEven(value, index, array){}
+4. filter: var evenArray =  mixArray.filter(isEven,this); // if elem iseven then it will be added in evenArray;
+5. map: var sourceArray = [1,2,3,4]; // replace returned value at provided index in callback;
+sourceArray.map(square,this);
+function square(value,index,array){
+return value*value;
+}
+6. reduce: // callback functio calls itself by sending returned value as prev and new value as next;
+var numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+var factorials = numbers.reduce(factorial);
+function factorial(previous, current) {
+ return previous * current;
+}
+7. reduceRight: //same as reduce but start from right (end of array);
+------------ Advance Loops --------
+1. var games=['cricket','football'];
+for(var game in gameArray){ //do something;}
+// break keyword stops and exits current loop;
+// continue keyword stops current iteration and starts with next iteration;
+---------Event Assigment ------
+1. Declarative : <inout type='button' onclick='buttonClicked();' id='btn'/>
+<script>
+function buttonClicked(){
+}
+</script>
+2. onEvent: document.getElementById('btn').onclick=buttonClicked();
+3. addEventListner: document.getElementById('btn').addEventListner("click",buttonClicked(),isCascading);
+document.getElementById('btn'').removeEventListner("click",buttonClicked,isCascading);
+4. Anonymous function: 
+document.egetElementById('btn').addEvenListner("click"),function(){};,isCascading);// if casecade is false the it behaves like bubbling.
+-------- Canceling Event -------
+function buttonClicked(){
+return false;
+//Or
+//window.event.returnValue = false;
+}
+window.event.cancelBubble = true;// stop event bubbling/tunneling to elemnt parents;
+----------- Focus Events --------
+onfocus,onblur,
+onfocusin: just before focus.
+------- Key Board Events ----
+onkeydown,onkeypress, onkeyup
+------ EVent object Properties to identify keys ------
+event.shiftKey,event.altKey,event.ctrlKey,event.keyCode: 
+-------mouse events -----
+mouseover,mouseenter,mouseout,mouseleave;
+mousedown,mouseup
+click,dbclick
+---------- mouse properties -------
+clientX,clientY,offsetX,offsetY,screenX,screenY;
+--------- Drag Drop -----
+<div class="dropzone"></div>
+<div class="dropzon"></div>
+<div class="dropzon3"></div>
+<div draggable="true" id="elem-drag">This draggable elem</div>
+var elem= document.getElementByClassName("dropzone") ;  
+elem.ondrop=function(){
+var data=window.event.dataTransfer.getData("Text");
+var sourceElem = document.getElementById(data);
+this.appendChild(sourceElem);
+}
+----------custome events------
+var myEvant=new CustomeEvemnt(
+'eventName',{detail:{description:'This is custom event by Asif ali', timeofEvent=new Date(),eventcode:2},
+bubbles:true,
+cancelable:true
+}
+)
+document.addEventListner('eventName',eventHandler'); // attach event to element
+document.dispatchEvent(myEvant); // call event attached with element; that ultimately call eventHandler func.
+----------Exception Handling--------
+try{//do work
+}
+catch(ex){
+alert(ex.message); //  error message
+alert(ex.number); // error number
+alert(ex.name);// name of exception object
+}
+throw new Error(25, "Invalid X coordinate");// creating custom exception with its own number and message.
+-------- Web Sockets --------
+var ws = new WebSocket("ws://127.0.0.1","['soap',''xmpp]");
+ws.onopen=function(){
+chatboax.value =chatboax.value + "Connection is opened";
+}
+ws.onclose=function(){
+chatboax.value=chatboax..value+"connection is closed";
+}
+ws.onmessage=function(newMessage){
+chatboax.value = chatboax.value + newMessage;
+}
+ws.onerror=function(){
+chatboax.value = chatbooax.value+" Some Error Occured";
+}
+btnSend.onclick=function(){
+if (ws.readyState == WebSocket.OPEN) {
+ //send message to server.
+ ws.send(newMessage.value);
+ }
+}
+
+---------------ajax calback, error parameters
+error: function (xhrRequest, errorNumber, errorText) {
+ $('#searchResults').append(errorThrown);
+ }
+DoWork(param1,function(status, data){
+});
+function DoWork(p1,f)
+{
+if(p1<1)
+f('Error',p1);
+else f('success',p1);
+}
+--------- WebWorker.html ------
+var wv=new Worker("webworker.js");
+wv.onmessage=function(evt){ // get data sent from worker process
+alert(evt.data);
+}
+wv.postMessage(string);
+---webworker.js----
+onmessage=function(evt)
+{
+var sum=0
+for(var i=1;i<=100;i++){
+sum=sum+i;
+}
+self.postMessage(sum);
+}
+--------Html5 elemenets ----
+number,
+range,
+url: 
+email,
+date,
+datetime,
+week,
+time,
+color,
+tel,
+Reset
+we can use pattern attaribute with input type text to make custome validator.
+any input type expecting text in it could have required, readonly, spellcheck="true" and placeholder attaributes.
+pattern attrbute can not override the validations on email and url etc.
+----------------XMLHttpRequest------------
+var xmReg=new XMLHttpRequest();
+xm.timeout=2000;
+xm.onreadystatechanged=function(state){
+  if(xm.readystate==4 && xm.status==200)// completed +ok
+  var responseBody=xm.response
+};
+xm.ontimeout=function(){alert("Request Timeout");xm.abort();};
+
+var _url = "www.test.com/getEmployeebyId?id=1"
+var _method="GET";
+var isAsync = false; // by default true;
+xm.open("GET",_url,isAsync,[username],[password]);
+xm.send(null);// we can send data in this method
+// Below linke shows my work
+https://www.w3schools.com/code/tryit.asp?filename=FO9F2ZMVLBH1 // get
+https://www.w3schools.com/code/tryit.asp?filename=FO9FQB8ULVHA // post
+https://www.w3schools.com/code/tryit.asp?filename=FO0JSX5HBHB0 // blob request
+---------- BLOB LOADING IN IMAGE usiong xmlhttp ----
+function SendRequest(){
+var xm=new XMLHttpRequest();
+xm.timeout=10000;
+var method="get";
+var url = "image.jpeg";
+
+xm.onreadystatechange=function(){
+debugger;
+if(xm.readyState==4)
+{
+console.log('state');
+if(xm.status==200)
+{
+console.log('status');
+var blob = xm.response;
+document.getElementById("img").src = URL.createObjectURL(blob);
+}
+}
+};
+xm.open(method,url,true);
+xm.responseType="blob";
+xm.send(null);
+}
+SendRequest();
+-------Form Submission ---
+1. To get whole form data to send in Jquery Ajax we will do "var data=$(form).serialize();" then send it in data attribute of jquery request.
+2. To send an control data using serialize method the control should have name attaribute, and it should have in vali state i.e (cheked for checkbox, radio )
+--------------------------Gradient in CSS -------------
+background:linear-gradient(black,gray,...,color); //linear gradient
+background:radial-gradient(black,gray,...,color);
+------------- Shadow in CSS -------------
+text-shadow: pos-x(5ps) pos-y(5px) blur(2px) color(red)
+box-shadow: pos-x(5ps) pos-y(5px) blur(2px) spread(30px: increased shadopw size) color(red) inset(if suppllied then shadow will start before object else starts after object)
+pos-x,pos-y could be -ve.
+----------------Clicp-------------
+img{
+ position: absolute;
+ clip: rect(25px, 50px, 50px, 25px);
+}
+The clip property works only on elements whose position is set as fixed or absolute
+----------------------positioning---------------
+fixed position places elem relativeto browser window
+relative position places elem relattive to normal flow.
+absolute position places elemnt relative to first relevant parent(if no parent is relative then set w.r.t browser window.)
+-------- Flex Layout------------
+#container{
+display:flex; 
+flex-direction:(row/column/column-reverse/row-reverse);
+flex-pack:start/end/center/distribute;
+ flex-flow: wrap/no-wrap (To wrap content if box width is less than content;)
+}
+#container .item{flex:1//width of individual item}
+-------- multi-column layout------------
+#container{
+width:500px;
+height:500px;
+column-count:5
+column-rule-color: black;
+column-rule-style: solid;
+column-rule-width: 5px;
+column-gap:5px
+}
+.header{column-span:all;}
+-----------------position,float and flow layout-----------
+element{ wrap-flow:auto/start/end/both/maximum/clear}
+------------------ grid layout----------------------
+div#mainGrid {
+ display: grid;
+ grid-columns: 150px 150px 150px 150px;
+ grid-rows: 75px 75px; // two rows each of 75px
+ }
+div #mainGrid > div:nth-child(1){
+ grid-column: 1; // 1st column
+ grid-row:1; // In 1st row
+ background-color: blue;
+}
+---------------------------------
+input[required]{border:solid 1px red;}
+$(input[type~='text checkbox radiobutton'] Specifies a space-separated list of words as the values for an attribute
+-----------------psudo-classes-----
+:visited,:active,:hover,:disabled
+------------psudo elements --------
+::after	(p::after	Insert content after every <p> element
+::before (p::before	Insert content before every <p> element
+::first-letter (p::first-letter	Selects the first letter of every <p> element
+::first-line (p::first-line	Selects the first line of every <p> element
+::selection (
+
+
+
+
+
+
+
