@@ -13,19 +13,34 @@ namespace Rextester
         public static void Main(string[] args)
         {
           
-            int n=10;
-            int []fib = new int[n+1];
+            long n=1000;
+            long []fib = new long[n+1];
+            long f=0;
             //Your code goes here
             
-            Fibnocci_DividenConquer(n);
-            Console.WriteLine("---------------");
-            Fibnocci_DynamicProgramming(n,ref fib);
+            //f=Fibnocci_Loop(n);
+            //f=Fibnocci_DividenConquer(n);
+            f=Fibnocci_DynamicProgramming(n,ref fib);
+            
+            Console.WriteLine(f);
             
         }
-        private static int Fibnocci_DividenConquer(int number)
+        private static long Fibnocci_Loop(long number)
+        {
+             if (number <= 1) 
+            { 
+                return number; 
+            } 
+            else
+            { 
+                return Fibnocci_Loop(number - 1) + Fibnocci_Loop(number - 2); 
+            } 
+        
+        }
+        private static long Fibnocci_DividenConquer(long number)
         {
              //Console.WriteLine("input:"+number.ToString());
-            int result=0;
+            long result=0;
             if(number<=1)
             {
                 result= number;
@@ -34,24 +49,21 @@ namespace Rextester
             {
                 result=Fibnocci_DividenConquer(number-2)+Fibnocci_DividenConquer(number-1);
             }
-            
-            Console.WriteLine(result);
             return result;
         }
-        private static int Fibnocci_DynamicProgramming(int number,ref int[] fib)
+        private static long Fibnocci_DynamicProgramming(long number,ref long[] fib)
         {
          //Console.WriteLine("input:"+number.ToString());
-            int result=0;
+            long result=0;
             if(fib[number]>0)
                  return fib[number]; 
-            else if(number<=1)		
+            else if(number<=1)
             {
                 result=number;
                 fib[number]=result;
             }
             else
             {
-                Console.WriteLine("input2:"+number.ToString());
                 result=Fibnocci_DynamicProgramming(number-2,ref fib)+Fibnocci_DynamicProgramming(number-1,ref fib);
                 fib[number]=result;
             }
